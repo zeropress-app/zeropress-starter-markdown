@@ -1,0 +1,75 @@
+# ZeroPress Markdown Starter
+
+Publish a Markdown documentation site with ZeroPress and the Docs theme.
+Grouped navigation, search, page outlines, and previous/next links are included.
+
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/zeropress-app/zeropress-starter-markdown/tree/latest)
+
+## Deploy
+
+Use the button to create your repository and deploy it to Cloudflare Workers.
+Keep the default commands: `npm run build` and `npm run deploy`.
+
+Edit the files in `documents/` and push your changes to publish them.
+After deployment, set `site.url` in `documents/.zeropress/config.json` to your
+site's public URL to enable canonical URLs and the sitemap.
+
+## Write
+
+- `documents/index.md` is the home page.
+- Other Markdown files become pages. Start each page with a heading.
+- Link to Markdown files with relative paths, such as `[Getting Started](getting-started.md)`.
+  ZeroPress converts these to published page URLs.
+- Use `public/` for files served directly, such as the included favicons.
+
+The sample pages demonstrate frontmatter, nested routes, alerts, task lists,
+tables, highlighted code, and Mermaid diagrams. Markdown source files and build
+configuration are not published.
+
+## Customize
+
+Edit `documents/.zeropress/config.json` to set:
+
+- `site`: title, description, language, public URL, and search.
+- `menus.primary`: sidebar groups and nested links using published URLs.
+- `menus.footer`: footer links.
+- `collections`: previous/next reading order using Markdown source paths.
+
+The public URL may stay empty until your first deployment. Search is enabled
+by default and uses the generated static index.
+
+Edit `theme/assets/style.css` for styles and the HTML files in `theme/` for
+layout. The included [navigation guide](documents/guides/navigation.md) and
+[configuration reference](documents/guides/configuration.md) show working examples.
+
+See [ZeroPress Build Pages](https://build-pages.zeropress.dev/)
+for frontmatter and other configuration options.
+
+## Local development
+
+Use Node.js 22.22.0 or later; `.node-version` selects Node.js 24.
+
+```sh
+npm ci
+npm run dev
+```
+
+The local preview rebuilds when you save files in `documents/`, `public/`, or
+`theme/`. If a build fails, it keeps the last successful site while you fix the
+source.
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Watch files, rebuild, and serve locally |
+| `npm run build` | Generate the static site in `dist/` |
+| `npm run preview` | Build once and serve locally |
+| `npm run deploy` | Deploy the existing `dist/` |
+| `npm run deploy:dry-run` | Build and validate deployment without uploading |
+| `npm test` | Check page generation and local development |
+| `npm run format:wrangler` | Format `wrangler.jsonc` |
+
+Generated files in `dist/` and `.zeropress-build-pages/` are excluded from Git.
+
+## License
+
+MIT

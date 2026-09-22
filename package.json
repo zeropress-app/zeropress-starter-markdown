@@ -1,0 +1,27 @@
+{
+  "name": "zeropress-starter-markdown",
+  "description": "A static ZeroPress site written in Markdown",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.22.0"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "zeropress-build-pages --theme-path ./theme --source ./documents --public-dir ./public --destination ./dist --no-copy-markdown-source",
+    "preview": "npm run build && wrangler dev --local",
+    "deploy": "wrangler deploy",
+    "deploy:dry-run": "npm run build && wrangler deploy --dry-run",
+    "test": "node --test test/*.test.mjs",
+    "format:wrangler": "node scripts/format-wrangler.mjs",
+    "format:wrangler:check": "node scripts/format-wrangler.mjs --check"
+  },
+  "dependencies": {
+    "@zeropress/build-pages": "1.0.1"
+  },
+  "devDependencies": {
+    "jsonc-parser": "3.3.1",
+    "wrangler": "4.133.0"
+  }
+}
