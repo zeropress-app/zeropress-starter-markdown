@@ -1,0 +1,116 @@
+{
+  "$schema": "https://schemas.zeropress.dev/build-pages-config/v1.0/schema.json",
+  "version": "1.0",
+  "site": {
+    "title": "My Docs",
+    "description": "Documentation written in Markdown and published with ZeroPress.",
+    "url": "",
+    "locale": "en-US",
+    "search": true
+  },
+  "menus": {
+    "primary": {
+      "name": "Documentation",
+      "items": [
+        {
+          "title": "GET STARTED",
+          "url": "/",
+          "meta": {
+            "accent": "blue"
+          },
+          "children": [
+            {
+              "title": "Overview",
+              "url": "/"
+            },
+            {
+              "title": "Getting Started",
+              "url": "/getting-started"
+            }
+          ]
+        },
+        {
+          "title": "GUIDES",
+          "url": "/guides/markdown",
+          "meta": {
+            "accent": "sage"
+          },
+          "children": [
+            {
+              "title": "Markdown",
+              "url": "/guides/markdown",
+              "children": [
+                {
+                  "title": "Markdown Examples",
+                  "url": "/markdown-examples/"
+                }
+              ]
+            },
+            {
+              "title": "Navigation",
+              "url": "/guides/navigation"
+            }
+          ]
+        },
+        {
+          "title": "REFERENCE",
+          "url": "/guides/configuration",
+          "meta": {
+            "accent": "gold"
+          },
+          "children": [
+            {
+              "title": "Configuration",
+              "url": "/guides/configuration"
+            }
+          ]
+        }
+      ]
+    },
+    "footer": {
+      "name": "Resources",
+      "items": [
+        {
+          "title": "About",
+          "url": "/about"
+        },
+        {
+          "title": "Build Pages documentation",
+          "url": "https://build-pages.zeropress.dev/",
+          "target": "_blank"
+        }
+      ]
+    }
+  },
+  "collections": {
+    "get_started": {
+      "title": "Get Started",
+      "items": [
+        "index.md",
+        "getting-started.md"
+      ]
+    },
+    "guides": {
+      "title": "Guides",
+      "items": [
+        "guides/markdown.md",
+        "markdown-examples/index.md",
+        "guides/navigation.md"
+      ]
+    },
+    "reference": {
+      "title": "Reference",
+      "items": [
+        "guides/configuration.md"
+      ]
+    }
+  },
+  "markdown": {
+    "updated_at": "none",
+    "link_output": "clean"
+  },
+  "front_page": {
+    "type": "markdown",
+    "file": "index.md"
+  }
+}
