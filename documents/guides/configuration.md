@@ -13,6 +13,7 @@ Set the title, description, language, and public URL:
     "title": "My Docs",
     "description": "Documentation written in Markdown.",
     "url": "https://docs.example.com",
+    "robots": { "allow_indexing": false },
     "locale": "en-US",
     "search": true
   }
@@ -22,6 +23,9 @@ Set the title, description, language, and public URL:
 The starter leaves `site.url` empty so it can be deployed before you choose a
 domain. Set it to your site's public URL after deployment to enable canonical
 URLs and the sitemap.
+
+Sample content disallows crawling by default. Set `site.robots.allow_indexing`
+to `true` when your own content is ready for search engines to crawl.
 
 ## Search
 

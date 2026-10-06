@@ -5,6 +5,9 @@
     "title": "My Docs",
     "description": "Documentation written in Markdown and published with ZeroPress.",
     "url": "",
+    "robots": {
+      "allow_indexing": false
+    },
     "locale": "en-US",
     "search": true
   },

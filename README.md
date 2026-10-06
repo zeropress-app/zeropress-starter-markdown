@@ -14,6 +14,10 @@ Edit the files in `documents/` and push your changes to publish them.
 After deployment, set `site.url` in `documents/.zeropress/config.json` to your
 site's public URL to enable canonical URLs and the sitemap.
 
+The sample disallows crawling by default. When your own content is ready for
+search engines to crawl, set `site.robots.allow_indexing` to `true` in the same
+configuration file.
+
 ## Write
 
 - `documents/index.md` is the home page.

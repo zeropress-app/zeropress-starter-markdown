@@ -67,7 +67,9 @@ Push your changes to the repository connected to Cloudflare Workers.
 The default build command is `npm run build`, followed by `npm run deploy`.
 
 After the first deployment, set `site.url` in the site configuration to your
-public URL. This enables canonical URLs and the sitemap.
+public URL. This enables canonical URLs and the sitemap. When your own content
+is ready for search engines to crawl, set `site.robots.allow_indexing` to `true`
+in the same configuration file.
 
 For a local deployment check:
 
