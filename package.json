@@ -19,10 +19,13 @@
     "format:wrangler:check": "node scripts/format-wrangler.mjs --check"
   },
   "dependencies": {
-    "@zeropress/build-pages": "1.0.1"
+    "@zeropress/build-pages": "^1.0.3"
   },
   "devDependencies": {
     "jsonc-parser": "3.3.1",
-    "wrangler": "4.133.0"
+    "wrangler": "4.148.0"
+  },
+  "overrides": {
+    "sharp": "0.35.5"
   }
 }
