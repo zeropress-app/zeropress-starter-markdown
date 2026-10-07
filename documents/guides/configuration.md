@@ -29,12 +29,17 @@ to `true` when your own content is ready for search engines to crawl.
 
 ## Search
 
-This starter enables ZeroPress's built-in static search with
-`"search": true`. Readers can search page titles, headings, and content using
-the header button or **Command+K / Ctrl+K**.
+Search is enabled with `"search": true`. Readers can search page titles,
+headings, and content using the header button or **Command+K / Ctrl+K**.
 
-Search files are generated with the site. No search service or API token is
-needed.
+`npm run dev` uses ZeroPress's built-in search. Production builds run the
+optional `search:replace-with-pagefind` step through `postbuild`: Pagefind is
+generated first, then the search adapter is replaced and the unused native
+index is removed. Use `npm run preview` to check production search locally.
+No search service or API token is needed.
+
+Set `"search": false` to disable search. To keep ZeroPress search in production,
+remove `postbuild` from `package.json` and rebuild.
 
 ## Home page
 

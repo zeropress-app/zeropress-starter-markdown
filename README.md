@@ -40,7 +40,7 @@ Edit `documents/.zeropress/config.json` to set:
 - `collections`: previous/next reading order using Markdown source paths.
 
 The public URL may stay empty until your first deployment. Search is enabled
-by default and uses the generated static index.
+by default. Local development uses ZeroPress search; production builds use Pagefind.
 
 Edit `theme/assets/style.css` for styles and the HTML files in `theme/` for
 layout. The included [navigation guide](documents/guides/navigation.md) and
@@ -65,14 +65,36 @@ source.
 | Command | Purpose |
 | --- | --- |
 | `npm run dev` | Watch files, rebuild, and serve locally |
-| `npm run build` | Generate the static site in `dist/` |
-| `npm run preview` | Build once and serve locally |
+| `npm run build` | Generate the site in `dist/` and replace its search with Pagefind |
+| `npm run preview` | Build and preview the deployment output, including Pagefind |
 | `npm run deploy` | Deploy the existing `dist/` |
 | `npm run deploy:dry-run` | Build and validate deployment without uploading |
 | `npm test` | Check page generation and local development |
 | `npm run format:wrangler` | Format `wrangler.jsonc` |
 
 Generated files in `dist/` and `.zeropress-build-pages/` are excluded from Git.
+
+## Search
+
+The Docs search dialog works with both ZeroPress's built-in search and
+[Pagefind](https://pagefind.app/). `npm run dev` uses the built-in index for quick
+rebuilds. `npm run build` and `npm run preview` use Pagefind.
+
+After a successful site build, `postbuild` runs `search:replace-with-pagefind`
+using the Pagefind version installed with the project. It writes the index to
+`dist/_zeropress/pagefind/`, replaces `search.js` with the generated Pagefind
+adapter, then removes the unused `search.json`. If indexing fails, the build
+fails before the adapter is replaced. Pages are indexed from their content;
+sidebar, navigation, and footer text are excluded.
+
+Set `site.search` to `false` in `documents/.zeropress/config.json` to disable
+search. Pagefind is then skipped. A site with no searchable pages retains an
+empty built-in index rather than indexing unrelated HTML. Pagefind uses its own
+ranking and language handling.
+
+To keep built-in search in production, remove `postbuild` from `package.json`
+and rebuild. You can also remove `search:replace-with-pagefind`, its script,
+and the Pagefind dependency if you no longer use them.
 
 ## License
 

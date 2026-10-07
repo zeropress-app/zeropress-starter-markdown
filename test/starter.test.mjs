@@ -125,8 +125,10 @@ test('builds clean page links and public assets while keeping source private', a
   assert.match(guide, /href="#first-steps" data-toc-link/);
   assert.match(guide, /class="pager__next" href="\/guide\/details"/);
   assert.match(html, /aria-label="Search docs"/);
-  const search = await readFile(join(root, 'dist/_zeropress/search.json'), 'utf8');
-  assert.match(search, /Choose your settings/);
+  const adapter = await readFile(join(root, 'dist/_zeropress/search.js'), 'utf8');
+  assert.equal(adapter, await readFile(join(root, 'dist/_zeropress/search_pagefind.js'), 'utf8'));
+  await readFile(join(root, 'dist/_zeropress/pagefind/pagefind.js'));
+  await assert.rejects(readFile(join(root, 'dist/_zeropress/search.json')), { code: 'ENOENT' });
   assert.match(await readFile(join(root, 'dist/sitemap.xml'), 'utf8'), /https:\/\/site.example\/guide\//);
   assert.equal(await readFile(join(root, 'dist/example.txt'), 'utf8'), 'Example download\n');
   assert.equal(await readFile(join(root, 'documents/index.md'), 'utf8'), home);
@@ -174,6 +176,10 @@ test('serves local routes, watches source changes, and recovers from build error
   }
   await waitFor(() => contains('/', 'Example home'), 'Local preview did not start.', dev.output);
   assert.equal((await response('/guide/')).status, 200);
+  const nativeSearch = await response('/_zeropress/search.json');
+  assert.equal(nativeSearch.status, 200);
+  assert.match(nativeSearch.body, /Choose your settings/);
+  assert.match((await response('/_zeropress/search.js')).body, /search\.json/);
   assert.equal((await response('/guide/details')).status, 200);
   const missing = await response('/missing-page');
   assert.equal(missing.status, 404);
@@ -196,4 +202,14 @@ test('serves local routes, watches source changes, and recovers from build error
   await waitFor(() => contains('/', 'Recovered site'), 'Preview did not recover after fixing configuration.', dev.output);
   await stop(dev);
   await waitFor(async () => (await response('/')).status === 0, 'Local preview did not stop.', dev.output);
+});
+
+
+test('builds successfully when search is disabled in the Markdown configuration', async (t) => {
+  const root = await fixture(t);
+  await writeFile(join(root, 'documents/.zeropress/config.json'), JSON.stringify({ ...config, site: { ...config.site, search: false } }));
+  const result = await build(root);
+  assert.equal(result.code, 0, result.output);
+  assert.match(result.output, /Search is disabled; skipping replacement/);
+  assert.match(await readFile(join(root, 'dist/guide/index.html'), 'utf8'), /Choose your settings/);
 });
