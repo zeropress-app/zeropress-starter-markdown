@@ -3,6 +3,10 @@
 Publish a Markdown documentation site with ZeroPress and the Docs theme.
 Grouped navigation, search, page outlines, and previous/next links are included.
 
+> [!IMPORTANT]
+> We recommend a private repository for your site's content and settings.
+> On Cloudflare's setup page, select **Create private Git repository**.
+
 [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/zeropress-app/zeropress-starter-markdown/tree/latest)
 
 ## Deploy
